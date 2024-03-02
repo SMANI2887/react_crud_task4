@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 
-function ReadStud({ studs, addStud }) {
-  // useEffect(() => {
-  //   newstudRef.current.focus();
-  //   newMarkRef.current.focus();
-  // }, []);
+function ReadStud({ users }) {
+ 
 
   return (
     <div>
@@ -14,16 +11,16 @@ function ReadStud({ studs, addStud }) {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Marks</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
-          {studs.map((stud, index) => {
+          {users.map((users, index) => {
             return (
               <tr key={index}>
-                <td>{stud.id}</td>
-                <td>{stud.userName}</td>
-                <td>{stud.userEmail}</td>
+                <td>{users.id}</td>
+                <td>{users.userName}</td>
+                <td>{users.userEmail}</td>
               </tr>
             );
           })}

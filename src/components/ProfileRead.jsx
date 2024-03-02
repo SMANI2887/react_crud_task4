@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProfileRead({ studs, setStud }) {
+function ProfileRead({ users, setUsers }) {
   return (
     <>
       <h2>PROFILE READ</h2>
@@ -13,7 +13,7 @@ function ProfileRead({ studs, setStud }) {
           </tr>
         </thead>
         <tbody>
-          {studs.map((stud, index) => {
+          {users.map((stud, index) => {
             return (
               <tr key={index}>
                 <td>{stud.id}</td>

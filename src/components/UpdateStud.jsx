@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import EditStud from "./EditStud";
 import "../Style/style.css";
 
-function UpdateStud({ studs, setStud }) {
-  console.log(studs);
+function UpdateStud({ users, setUsers }) {
+  
 
   const [options, setOptions] = useState("Select ID");
 
@@ -19,11 +19,11 @@ function UpdateStud({ studs, setStud }) {
         <br />
         <div>
           <label>
-            Select Student ID :&nbsp;&nbsp;&nbsp;
+            Select User ID :&nbsp;&nbsp;&nbsp;
             <select onChange={handleFunc} value={options}>
               <option disabled>{"Select ID"}</option>
-              {studs.map((stud) => (
-                <option key={stud.id}> {stud.id}</option>
+              {users.map((users) => (
+                <option key={users.id}> {users.id}</option>
               ))}
             </select>
           </label>
@@ -37,8 +37,8 @@ function UpdateStud({ studs, setStud }) {
           {options !== "Select ID" && (
             <EditStud
               options={options}
-              studs={studs}
-              setStud={setStud}
+              users={users}
+              setUsers={setUsers}
               setOptions={setOptions}
             />
           )}

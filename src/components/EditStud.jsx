@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function EditStud({ options, studs, setStud }) {
+function EditStud({ options, users, setUsers }) {
   const [selectedId, setSelectedId] = useState(null);
   const [editedName, setEditedName] = useState("");
-  const [editedMark, setEditedMark] = useState("");
+  const [editedEmail, setEditedEmail] = useState("");
 
   const fetchNote = async () => {
     try {
@@ -16,7 +16,7 @@ function EditStud({ options, studs, setStud }) {
         if (response.data) {
           setSelectedId(response.data);
           setEditedName(response.data.userName);
-          setEditedMark(response.data.userEmail);
+          setEditedEmail(response.data.userEmail);
         }
       }
     } catch (error) {
@@ -34,25 +34,25 @@ function EditStud({ options, studs, setStud }) {
     console.log("updating the note...");
 
     // prepare the object to update
-    let student = {
+    let member = {
       id: selectedId.id,
       userName: editedName,
-      userEmail: editedMark,
+      userEmail: editedEmail,
     };
 
     axios
       .put(
         `https://65bc9d7fb51f9b29e931de1d.mockapi.io/users/${selectedId.id}`,
-        student
+        member
       )
       .then((response) => {
         console.log(response);
         console.log("Note updated successfully");
 
         // update the state
-        let updatedNotes = studs.filter((n) => n.id !== student.id);
-        updatedNotes.concat(student);
-        setStud(updatedNotes);
+        let updatedNotes = users.filter((n) => n.id !== member.id);
+        updatedNotes.concat(member);
+        setUsers(updatedNotes);
         location.reload();
       })
       .catch((error) => {
@@ -76,10 +76,10 @@ function EditStud({ options, studs, setStud }) {
           <br />
           <br />
           <label>
-            Mark: &nbsp;&nbsp;
+            Email: &nbsp;&nbsp;
             <input
-              value={editedMark}
-              onChange={(e) => setEditedMark(e.target.value)}
+              value={editedEmail}
+              onChange={(e) => setEditedEmail(e.target.value)}
             />
           </label>
 

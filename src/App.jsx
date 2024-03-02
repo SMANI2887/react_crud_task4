@@ -11,22 +11,22 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   // define state
-  const [studs, setStud] = useState([]);
+  const [users, setUsers] = useState([]);
 
   //Create New Student records
-  const [newstud, setNewstud] = useState("");
-  const [newMark, setNewMark] = useState("");
+  const [newUser, setNewUser] = useState("");
+  const [newEmail, setNewEmail] = useState("");
 
   //null record requried
-  const newstudRef = useRef(null);
-  const newMarkRef = useRef(null);
+  const newUserRef = useRef(null);
+  const newEmailRef = useRef(null);
 
   const fetchNotes = async () => {
     try {
       const response = await axios.get(
         "https://65bc9d7fb51f9b29e931de1d.mockapi.io/users/"
       );
-      setStud(response.data);
+      setUsers(response.data);
     } catch (error) {
       console.log("Failed to fetch notes:", error);
     }
@@ -36,37 +36,37 @@ function App() {
     fetchNotes();
   }, []);
 
-  const addStud = (e) => {
+  const addUser = (e) => {
     e.preventDefault();
     // console.log('button click');
     // new record create
-    const studObject = {
-      id: studs.length + 1,
-      userName: newstud,
-      userEmail: newMark,
+    const userObj = {
+      id: users.length + 1,
+      userName: newUser,
+      userEmail: newEmail,
     };
 
     // setStud(studs.concat(studObject));
     axios
-      .post("https://65bc9d7fb51f9b29e931de1d.mockapi.io/users/", studObject)
+      .post("https://65bc9d7fb51f9b29e931de1d.mockapi.io/users/", userObj)
       .then((response) => {
         console.log("note added successfully...");
         location.reload();
       });
 
     //clear stud record
-    setNewstud("");
-    setNewMark("");
+    setNewUser("");
+    setNewEmail("");
 
-    newstudRef.current.focus();
-    newMarkRef.current.focus();
+    newUserRef.current.focus();
+    newEmailRef.current.focus();
 
     fetchNotes();
   };
 
-  const changeStud = (e) => {
-    setStud(e.target.value);
-  };
+  // const changeStud = (e) => {
+  //   setStud(e.target.value);
+  // };
 
   return (
     <>
@@ -81,57 +81,68 @@ function App() {
       </div>
 
       <Router>
-        <Link to="/createStud" className="Lstyle">
-          CreateStud
+        <Link to="/create-user" className="Lstyle">
+          Create_User
         </Link>
-        <Link to="/readStud" className="Lstyle">
-          ReadStud
-        </Link>
-
-        <Link to="/UpdateStud" className="Lstyle">
-          UpdateStud
+        <Link to="/read" className="Lstyle">
+          Read_User
         </Link>
 
-        <Link to="/ProfileRead" className="Lstyle">
-          Profile
+        <Link to="/edit-user/:id" className="Lstyle">
+          Edit_User
         </Link>
-        <Link to="/ProfileEdit" className="Lstyle">
-          Profile-edit
+
+        <Link to="/profile/:id" className="Lstyle">
+          Profile_Read
+        </Link>
+        <Link to="/edit-profile/:id" className="Lstyle">
+          Profile_Edit
         </Link>
         <hr></hr>
         <Routes>
           <Route
-            path="/createStud"
+            path="/create-user"
             element={
               <CreateStud
-                addStud={addStud}
-                newstudRef={newstudRef}
-                newMardRef={newMarkRef}
-                newstud={newstud}
-                newMark={newMark}
-                setNewstud={setNewstud}
-                setNewMark={setNewMark}
-                studs={studs}
+                addUser={addUser}
+                newUserRef={newUserRef}
+                newEmailRef={newEmailRef}
+                newUser={newUser}
+                newEmail={newEmail}
+                setNewUser={setNewUser}
+                setNewEmail={setNewEmail}
+                users={users}
               />
             }
           />
 
-          <Route
-            path="/readStud"
-            element={<ReadStud addStud={addStud} studs={studs} />}
-          />
+          <Route path="/read" element={<ReadStud users={users} />} />
 
           <Route
-            path="/UpdateStud"
-            element={<UpdateStud studs={studs} setStud={setStud} />}
+            path="/edit-user/:id"
+            element={
+              <UpdateStud users={users} addUser={addUser} setUsers={setUsers} />
+            }
           />
           <Route
-            path="/ProfileRead"
-            element={<ProfileRead studs={studs} setStud={setStud} />}
+            path="/profile/:id"
+            element={
+              <ProfileRead
+                users={users}
+                addUser={addUser}
+                setUsers={setUsers}
+              />
+            }
           />
           <Route
-            path="/ProfileEdit"
-            element={<ProfileEdit studs={studs} setStud={setStud} />}
+            path="/edit-profile/:id"
+            element={
+              <ProfileEdit
+                users={users}
+                addUser={addUser}
+                setUsers={setUsers}
+              />
+            }
           />
         </Routes>
       </Router>

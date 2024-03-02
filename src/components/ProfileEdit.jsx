@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function ProfileUpdate({ options2, studs, setStud }) {
+function ProfileUpdate({ options2, users, setUsers }) {
   const [selectedId2, setSelectedId2] = useState(null);
   const [editedName2, setEditedName2] = useState("");
   const [editedMark2, setEditedMark2] = useState("");
@@ -50,9 +50,9 @@ function ProfileUpdate({ options2, studs, setStud }) {
         console.log("Note updated successfully");
 
         // update the state
-        let updatedNotes = studs.filter((n) => n.id !== student.id);
+        let updatedNotes = users.filter((n) => n.id !== student.id);
         updatedNotes.concat(student);
-        setStud(updatedNotes);
+        setUsers(updatedNotes);
         location.reload();
       })
       .catch((error) => {
@@ -94,7 +94,7 @@ function ProfileUpdate({ options2, studs, setStud }) {
   );
 }
 
-function ProfileEdit({ studs, setStud }) {
+function ProfileEdit({ users, setUsers }) {
   const [options2, setOptions2] = useState("Select ID");
 
   const handleFunc2 = (e) => {
@@ -107,11 +107,11 @@ function ProfileEdit({ studs, setStud }) {
         <h2>PROFILE EDIT From &nbsp;&nbsp;&nbsp;</h2>
         <br></br>
         <label>
-          Select Student ID :&nbsp;&nbsp;&nbsp;
+          Select Profile ID :&nbsp;&nbsp;&nbsp;
           <select onChange={handleFunc2} value={options2}>
             <option disabled>{"Select ID"}</option>
-            {studs.map((stud) => (
-              <option key={stud.id}> {stud.id}</option>
+            {users.map((users) => (
+              <option key={users.id}> {users.id}</option>
             ))}
           </select>
         </label>
@@ -124,8 +124,8 @@ function ProfileEdit({ studs, setStud }) {
           {options2 !== "Select ID" && (
             <ProfileUpdate
               options2={options2}
-              studs={studs}
-              setStud={setStud}
+              users={users}
+              setUsers={setUsers}
               setOptions2={setOptions2}
             />
           )}

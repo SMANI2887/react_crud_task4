@@ -3,36 +3,35 @@ import React, { useEffect } from "react";
 import "../Style/style.css";
 
 function CreateStud({
-  addStud,
-  newstudRef,
-  newMarkRef,
-  newstud,
-  newMark,
-  setNewstud,
-  setNewMark,
-  studs,
+  addUser,
+  newUserRef,
+  newEmailRef,
+  newUser,
+  newEmail,
+  setNewUser,
+  setNewEmail
 }) {
   return (
     <>
       <div className="center">
-        <form onSubmit={addStud}>
+        <form onSubmit={addUser}>
           <h2>CREATE USER DETAILS</h2> <br />
           <label>Name :&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <input
             name="filter"
-            onChange={(e) => setNewstud(e.target.value)}
-            ref={newstudRef}
-            value={newstud}
+            onChange={(e) => setNewUser(e.target.value)}
+            ref={newUserRef}
+            value={newUser}
             required
           ></input>
           <br />
           <br />
-          <label>Marks :&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label>Email :&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <input
             name="filter"
-            onChange={(e) => setNewMark(e.target.value)}
-            ref={newMarkRef}
-            value={newMark}
+            onChange={(e) => setNewEmail(e.target.value)}
+            ref={newEmailRef}
+            value={newEmail}
             required
           ></input>
           <br />
