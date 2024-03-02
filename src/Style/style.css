@@ -1,0 +1,29 @@
+.Lstyle {
+  padding: 15px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  width: 700px;
+  height: 300px;
+  margin-left: 300px;
+  background-color: rgb(153, 180, 170);
+  border-radius: 10px;
+}
+.col-sm-1 {
+  width: 25px;
+}
+
+button {
+  background-color: rgb(66, 156, 216);
+  color: aliceblue;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backclr {
+  background-color: rgb(82, 131, 235);
+}
